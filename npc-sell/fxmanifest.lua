@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Wolfiye'
 description 'NPC Sell Script with Quantity Selection, Animation & Item Images'
-version '1.2.0'
+version '1.0.0'
 
 lua54 'yes'
 
