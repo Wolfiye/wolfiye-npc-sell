@@ -1,7 +1,11 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 local CurrentVersion = "1.0.0" -- Current version of your resource
-local UpdateCheckURL = "https://raw.githubusercontent.com/Wolfiye/wolfiye-npc-sell/main/version.txt" -- URL to check latest version
+local UpdateCheckURL = "https://raw.githubusercontent.com/Wolfiye/wolfiye-npc-sell/main/npc-sell/version.txt
+"
+
+
+
 
 CreateThread(function()
     print(("^3[npc-sell]^0 Version %s Loaded"):format(CurrentVersion))
