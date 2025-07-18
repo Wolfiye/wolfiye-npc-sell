@@ -1,36 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-local CurrentVersion = "1.0.0" -- Current version of your resource
-local UpdateCheckURL = "https://raw.githubusercontent.com/Wolfiye/wolfiye-npc-sell/main/npc-sell/version.txt
-"
-
-
-
-
-CreateThread(function()
-    print(("^3[npc-sell]^0 Version %s Loaded"):format(CurrentVersion))
-
-    
-    PerformHttpRequest(UpdateCheckURL, function(err, text, headers)
-        if err == 200 and text then
-            local latestVersion = text:match("(%d+%.%d+%.%d+)")
-            if latestVersion then
-                if latestVersion ~= CurrentVersion then
-                    print(("^1[npc-sell]^0 Update available! Current: %s, Latest: %s"):format(CurrentVersion, latestVersion))
-                    print("^1Please update your resource to the latest version.^0")
-                else
-                    print("^2[npc-sell]^0 You are running the latest version.")
-                end
-            else
-                print("^3[npc-sell]^0 Failed to parse latest version from update URL.")
-            end
-        else
-            print(("^3[npc-sell]^0 Failed to check for updates. HTTP error code: %s"):format(err))
-        end
-    end)
-end)
-
-
 local function shouldCall911(npcLabel)
     for _, label in ipairs(Config.NPCsThatCall911) do
         if label == npcLabel then
