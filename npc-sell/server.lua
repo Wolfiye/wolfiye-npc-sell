@@ -79,7 +79,19 @@ RegisterNetEvent('npc-sell:sellItem', function(item, price, amount, npcLabel)
                         text = '911 - Suspicious Sale',
                         time = 10,
                         radius = 150,
-                    }
+                    } 
+
+                    --[[TriggerEvent('ps-dispatch:server:notify', {     -- This is for PS-Dispatch. If you don't use CD-Dispatch Just remove the snippet & uncomment this snippet
+                    coords = coords,
+                    title = 'Suspicious Activity',
+                    message = 'A suspicious transaction was reported in the area.',
+                    alert = {
+                        sprite = 431,
+                        colour = 3,
+                        scale = 1.2,
+                        flashes = false
+                    },
+                    jobs = { 'police' }  ]]
                 })
             end
         end
