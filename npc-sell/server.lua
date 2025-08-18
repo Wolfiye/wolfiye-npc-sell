@@ -62,6 +62,8 @@ RegisterNetEvent('npc-sell:sellItem', function(item, price, amount, npcLabel)
                 local ped = GetPlayerPed(src)
                 local coords = GetEntityCoords(ped)
 
+
+
                 -- This is specific to CD Dispatch; replace if you use another system
                 TriggerClientEvent('cd_dispatch:AddNotification', -1, {
                     job_table = {'lspd', 'bcso', 'sasp'}, -- Police Jobs, adjust to your server
@@ -79,7 +81,68 @@ RegisterNetEvent('npc-sell:sellItem', function(item, price, amount, npcLabel)
                         text = '911 - Suspicious Sale',
                         time = 10,
                         radius = 150,
+                    } 
+
+
+
+                    --[[TriggerEvent('ps-dispatch:server:notify', {     -- This is for PS-Dispatch. If you don't use CD-Dispatch Just remove the snippet & uncomment this snippet
+                    coords = coords,
+                    title = 'Suspicious Activity',
+                    message = 'A suspicious transaction was reported in the area.',
+                    alert = {
+                        sprite = 431,
+                        colour = 3,
+                        scale = 1.2,
+                        flashes = false
+                    },
+                    jobs = { 'police' } --Add jobs here  ]]
+
+
+
+                    -- QS Dispatch
+                    --[[TriggerEvent('qs-dispatch:server:CreateDispatchCall', {
+                    job = { 'police', 'sheriff', 'traffic', 'patrol' }, -- Add jobs here
+                    callLocation = vector3(0, 0, 0), -- Coordinates of the call
+                    callCode = { code = '10-10', snippet = 'Vehicle Pursuit' }, -- Call code and description
+                    message = "A high-speed vehicle was spotted traveling at 120 km/h.", -- Dispatch call message
+                    flashes = true, -- Should the blip on the map flash?
+                    image = "URL", -- Optional: URL for an image attachment (use `getSSURL` if needed)
+                    blip = { -- Blip details for the map
+                         sprite = 488, -- Blip icon type
+                         scale = 1.5, -- Blip size
+                         colour = 1, -- Blip color
+                        flashes = true, -- Blip flashes
+                        text = 'High-Speed Pursuit', -- Blip label
+                        time = (60 * 1000), -- Duration of the blip (milliseconds)
+                        },
+                  otherData = { -- Additional optional information
+                 {
+                   text = 'Suspect wearing red', -- Additional detail
+                 icon = 'fas fa-user-secret' -- Font Awesome icon
+                            }
+                         }
+                     }) ]]
+
+                     --[[
+                    local data = {
+                    code = "alert code",
+                     label = "Alert Label",
+                     description = "alert description", -- Optional
+                     coords = coords, -- (Optional) custom coords, will automaticly take the coords if this doesn't exists
+                     blip = { -- Optional (and all the fields inside it are optional)
+                        sprite = 280,
+                        color = 4,
+                        scale = 1.0,
+                        name = "911 Call",
+                         alpha = 255,
+                         flash = true 
+                         removeAfter = 5 -- seconds, will remove the blip after this (Optional)
+                     },
+                    customSound = "sound mp3 link", -- (Optional) will replace the default sound with a custom sound of your choosing
+                    jobs = { "police" }, -- Can support multiple jobs, make sure its in a a table and this job exists in the config
                     }
+                    exports["mr-dispatch"]:CreateAlert(data)                    
+                     ]]
                 })
             end
         end
